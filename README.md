@@ -199,3 +199,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Made with ❤️ for Agile teams everywhere**
 
 *If you find this useful, please consider giving it a ⭐ on GitHub!*
+         
+## Disclaimer
+
+This app is being vibe coded with gemini and claude. Frontend is being done by gemini 3.0 and structuring & scripting by claude Opus 4.5. I'm not a high-skilled developer and this is not intended to be a project that im planning on waste a lot of time. Just fooling around and trying to get the most out of the modern AIs.
