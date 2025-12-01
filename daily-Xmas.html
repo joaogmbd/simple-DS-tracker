@@ -1,0 +1,2271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Scrum Master - Edição de Natal</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Marked.js for Markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        },
+                        christmas: {
+                            red: '#D42426',
+                            green: '#2F5233',
+                            gold: '#FFD700',
+                            snow: '#FFFFFF'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .dark .glass-panel {
+            background: rgba(30, 41, 59, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+        .pulse-ring {
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        /* Preview Modal Animation */
+        .preview-modal-enter {
+            animation: modalEnter 0.25s ease-out forwards;
+        }
+        @keyframes modalEnter {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        /* Expand button hover effect */
+        .expand-btn:hover .expand-icon {
+            transform: scale(1.2);
+        }
+        
+        /* Markdown Rendered Styles */
+        .markdown-preview {
+            line-height: 1.7;
+        }
+        .markdown-preview h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .dark .markdown-preview h1 {
+            border-bottom-color: #475569;
+        }
+        .markdown-preview h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        .markdown-preview h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .markdown-preview p {
+            margin-bottom: 0.75rem;
+        }
+        .markdown-preview strong {
+            font-weight: 700;
+            color: #1e293b;
+        }
+        .dark .markdown-preview strong {
+            color: #f1f5f9;
+        }
+        .markdown-preview em {
+            font-style: italic;
+        }
+        .markdown-preview ul, .markdown-preview ol {
+            margin-left: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .markdown-preview ul {
+            list-style-type: disc;
+        }
+        .markdown-preview ol {
+            list-style-type: decimal;
+        }
+        .markdown-preview li {
+            margin-bottom: 0.35rem;
+        }
+        .markdown-preview li::marker {
+            color: #64748b;
+        }
+        .markdown-preview blockquote {
+            border-left: 4px solid #ef4444;
+            padding-left: 1rem;
+            margin: 0.75rem 0;
+            background: rgba(239, 68, 68, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            color: #b91c1c;
+        }
+        .dark .markdown-preview blockquote {
+            background: rgba(239, 68, 68, 0.15);
+            color: #fca5a5;
+        }
+        .markdown-preview code {
+            background: #f1f5f9;
+            padding: 0.125rem 0.375rem;
+            border-radius: 0.25rem;
+            font-family: 'Fira Code', 'Monaco', monospace;
+            font-size: 0.875em;
+        }
+        .dark .markdown-preview code {
+            background: #334155;
+        }
+        .markdown-preview pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin: 0.75rem 0;
+        }
+        .markdown-preview pre code {
+            background: transparent;
+            padding: 0;
+        }
+        .markdown-preview hr {
+            border: none;
+            border-top: 1px solid #e2e8f0;
+            margin: 1rem 0;
+        }
+        .dark .markdown-preview hr {
+            border-top-color: #475569;
+        }
+        .markdown-preview a {
+            color: #2563eb;
+            text-decoration: underline;
+        }
+        .dark .markdown-preview a {
+            color: #60a5fa;
+        }
+        
+        /* Section highlights */
+        .markdown-preview .section-yesterday {
+            border-left: 3px solid #22c55e;
+            padding-left: 0.75rem;
+            margin: 0.5rem 0;
+        }
+        .markdown-preview .section-today {
+            border-left: 3px solid #3b82f6;
+            padding-left: 0.75rem;
+            margin: 0.5rem 0;
+        }
+        .markdown-preview .section-blockers {
+            border-left: 3px solid #ef4444;
+            padding-left: 0.75rem;
+            margin: 0.5rem 0;
+        }
+
+        /* --- CHRISTMAS THEME STYLES --- */
+        
+        /* Snow on Cards Container (For positioning context only) */
+        .snow-topped {
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* DICA: Se você quiser adicionar neve personalizada, adicione elementos 
+           dentro das divs com a classe 'snow-topped' e use position: absolute.
+           Exemplo:
+           .minha-neve {
+               position: absolute;
+               top: -10px;
+               right: -10px;
+               z-index: 10;
+           }
+        */
+
+        /* Christmas Lights */
+        .christmas-lights-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 30px;
+            z-index: 100;
+            pointer-events: none;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .light-wire {
+            position: absolute;
+            top: -15px;
+            left: 0;
+            width: 100%;
+            height: 30px;
+            border-bottom: 2px solid #222;
+            border-radius: 50%;
+            z-index: 99;
+        }
+
+        .lights {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            padding: 0 20px;
+            margin-top: -5px;
+        }
+
+        .light-bulb {
+            position: relative;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            animation-duration: 1.5s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            z-index: 100;
+        }
+
+        .light-bulb::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: 3px;
+            width: 6px;
+            height: 6px;
+            background: #222;
+            border-radius: 2px;
+        }
+
+        .light-red {
+            background-color: #ff3b3b;
+            box-shadow: 0 0 10px #ff3b3b;
+            animation-name: flash-red;
+        }
+        
+        .light-green {
+            background-color: #2eff5e;
+            box-shadow: 0 0 10px #2eff5e;
+            animation-name: flash-green;
+            animation-delay: 0.5s;
+        }
+
+        .light-blue {
+            background-color: #3b82f6;
+            box-shadow: 0 0 10px #3b82f6;
+            animation-name: flash-blue;
+            animation-delay: 1s;
+        }
+
+        .light-gold {
+            background-color: #FFD700;
+            box-shadow: 0 0 10px #FFD700;
+            animation-name: flash-gold;
+            animation-delay: 0.25s;
+        }
+
+        @keyframes flash-red { 0%, 100% { opacity: 1; box-shadow: 0 0 20px #ff3b3b; } 50% { opacity: 0.4; box-shadow: 0 0 5px #ff3b3b; } }
+        @keyframes flash-green { 0%, 100% { opacity: 1; box-shadow: 0 0 20px #2eff5e; } 50% { opacity: 0.4; box-shadow: 0 0 5px #2eff5e; } }
+        @keyframes flash-blue { 0%, 100% { opacity: 1; box-shadow: 0 0 20px #3b82f6; } 50% { opacity: 0.4; box-shadow: 0 0 5px #3b82f6; } }
+        @keyframes flash-gold { 0%, 100% { opacity: 1; box-shadow: 0 0 20px #FFD700; } 50% { opacity: 0.4; box-shadow: 0 0 5px #FFD700; } }
+
+     
+/* --- EFEITO DE NEVE (NOVO) --- */
+
+        /* Imagem de neve no topo dos cards */
+        .snow-cap {
+            position: absolute;
+            top: -40px; /* Ajuste conforme a altura da sua imagem neve.png */
+            left: 83%; /* Um pouco mais largo para cobrir as bordas */
+            width: 20%;
+            height: auto;
+            z-index: 20;
+            pointer-events: none; /* Deixa clicar no card através da imagem */
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+        }
+        .snow-cap2 {
+            position: absolute;
+            top: -40px; /* Ajuste conforme a altura da sua imagem neve.png */
+            left: 50%; /* Um pouco mais largo para cobrir as bordas */
+            width: 20%;
+            height: auto;
+            z-index: 20;
+            pointer-events: none; /* Deixa clicar no card através da imagem */
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+        }
+        .snow-cap3 {
+            position: absolute;
+            top: -40px; /* Ajuste conforme a altura da sua imagem neve.png */
+            left: 83%; /* Um pouco mais largo para cobrir as bordas */
+            width: 20%;
+            height: auto;
+            z-index: 20;
+            pointer-events: none; /* Deixa clicar no card através da imagem */
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+        }
+
+        /* Container do fundo de neve */
+        #snow-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Fica atrás do main (que tem z-index 10) */
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        /* Bolinhas de neve individuais */
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            background-color: #FFF;
+            border-radius: 50%;
+            animation-name: snowfall;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+        
+        /* Tema escuro: neve um pouco mais transparente para não ofuscar */
+        .dark .snowflake {
+            opacity: 0.15 !important; 
+        }
+
+        @keyframes snowfall {
+            0% {
+                transform: translateY(-10px) translateX(0);
+            }
+            100% {
+                transform: translateY(100vh) translateX(20px);
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 dark:bg-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300"> <div id="snow-background"></div>
+
+    <!-- Christmas Lights -->
+    <div class="christmas-lights-container">
+        <!-- Using inline JS to generate lights to keep code clean -->
+        <div class="lights" id="christmas-lights-row"></div>
+    </div>
+    
+    <script>
+        const saveSound = new Audio('https://www.myinstants.com/media/sounds/christmas-bells-sound-effect-christmassoundeffects-hd-mp3cut.mp3');
+        saveSound.volume = 1;
+        // Generate lights
+        const lightsContainer = document.getElementById('christmas-lights-row');
+        const colors = ['light-red', 'light-green', 'light-gold', 'light-blue'];
+        const numLights = Math.floor(window.innerWidth / 40); // 1 light every 40px approx
+        
+        for (let i = 0; i < numLights; i++) {
+            const bulb = document.createElement('div');
+            bulb.className = `light-bulb ${colors[i % colors.length]}`;
+            // Random animation speed offset
+            bulb.style.animationDuration = (1 + Math.random()) + 's';
+            lightsContainer.appendChild(bulb);
+        }
+        // ... (código existente das luzes de natal) ...
+
+        // --- GERAÇÃO DA NEVE DE FUNDO ---
+        const snowContainer = document.getElementById('snow-background');
+        const snowCount = 50; // Quantidade de bolas de neve
+
+        for (let i = 0; i < snowCount; i++) {
+            const flake = document.createElement('div');
+            flake.classList.add('snowflake');
+            
+            // Posição horizontal aleatória
+            flake.style.left = Math.random() * 100 + 'vw';
+            
+            // Tamanho aleatório (entre 2px e 6px)
+            const size = Math.random() * 4 + 2; 
+            flake.style.width = size + 'px';
+            flake.style.height = size + 'px';
+            
+            // Opacidade baixa (entre 0.1 e 0.4)
+            flake.style.opacity = Math.random() * 0.3 + 0.1;
+            
+            // Velocidade média para lenta (entre 5s e 15s)
+            flake.style.animationDuration = (Math.random() * 10 + 5) + 's';
+            
+            // Atraso aleatório para não caírem todas juntas no início
+            flake.style.animationDelay = Math.random() * 5 + 's';
+            
+            snowContainer.appendChild(flake);
+        }
+    </script>
+
+    <!-- Navbar -->
+    <nav class="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center text-white font-bold relative">
+                        DS
+                        <!-- Santa Hat Icon via FA (simplified) -->
+                        <i class="fas fa-hat-santa absolute -top-3 -right-2 text-white drop-shadow-md transform rotate-12" style="font-size: 1.2rem;"></i>
+                    </div>
+                    <h1 class="text-xl font-bold tracking-tight" data-i18n="navTitle">Daily Scrum <span class="text-red-600">Natal</span> 🎅</h1>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleSettings()" class="text-sm bg-slate-500 hover:bg-slate-600 text-white px-3 py-1.5 rounded-lg font-medium transition-colors flex items-center gap-2" title="Configurações">
+                        <i class="fas fa-cog"></i>
+                        <span class="hidden sm:inline" data-i18n="navConfig">Config</span>
+                    </button>
+                    <button onclick="toggleTagsConfig()" class="text-sm bg-purple-500 hover:bg-purple-600 text-white px-3 py-1.5 rounded-lg font-medium transition-colors flex items-center gap-2" title="Configurar Tags">
+                        <i class="fas fa-tags"></i>
+                        <span class="hidden sm:inline" data-i18n="navTags">Tags</span>
+                    </button>
+                    <button onclick="exportData()" class="text-sm bg-green-500 hover:bg-green-600 text-white px-3 py-1.5 rounded-lg font-medium transition-colors flex items-center gap-2" title="Exportar dados">
+                        <i class="fas fa-download"></i>
+                        <span class="hidden sm:inline" data-i18n="navExport">Exportar</span>
+                    </button>
+                    <button onclick="importData()" class="text-sm bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-lg font-medium transition-colors flex items-center gap-2" title="Importar dados">
+                        <i class="fas fa-upload"></i>
+                        <span class="hidden sm:inline" data-i18n="navImport">Importar</span>
+                    </button>
+                    <button onclick="toggleDarkMode()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors" title="Alternar Tema">
+                        <i id="theme-icon-moon" class="fas fa-moon"></i>
+                        <i id="theme-icon-sun" class="fas fa-sun text-yellow-400 hidden"></i>
+                    </button>
+                    <button onclick="resetData()" class="text-sm text-red-500 hover:text-red-700 font-medium" data-i18n="navClearAll">
+                        Limpar Tudo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-6 relative z-10">
+
+        <!-- Column Left: Inputs (8 cols) -->
+        <div class="lg:col-span-7 space-y-6">
+            
+            <!-- Context Bar -->
+            <div class="glass-panel rounded-xl p-4 shadow-sm flex flex-wrap gap-4 items-center justify-between snow-topped mt-2">
+                <div class="flex items-center gap-2">
+                    <span class="text-sm font-semibold text-slate-500 dark:text-slate-400" data-i18n="mood">Humor:</span>
+                    <div class="flex gap-1" id="mood-selector">
+                        <button onclick="setMood('🚀')" class="mood-btn p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg text-xl transition-all" data-mood="🚀" data-i18n-title="moodEnergized" title="Energizado">🚀</button>
+                        <button onclick="setMood('🙂')" class="mood-btn p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg text-xl transition-all" data-mood="🙂" data-i18n-title="moodGood" title="Bem">🙂</button>
+                        <button onclick="setMood('😐')" class="mood-btn p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg text-xl transition-all" data-mood="😐" data-i18n-title="moodNormal" title="Normal">😐</button>
+                        <button onclick="setMood('🤯')" class="mood-btn p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg text-xl transition-all" data-mood="🤯" data-i18n-title="moodOverwhelmed" title="Sobrecarregado">🤯</button>
+                        <button onclick="setMood('🤒')" class="mood-btn p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg text-xl transition-all" data-mood="🤒" data-i18n-title="moodSick" title="Doente/Indisposto">🤒</button>
+                        <button onclick="setMood('🎄')" class="mood-btn p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg text-xl transition-all" data-mood="🎄" title="Natalino">🎄</button>
+                    </div>
+                </div>
+                
+                <button onclick="importYesterday()" class="flex items-center gap-2 text-sm bg-brand-50 text-brand-700 dark:bg-brand-900/30 dark:text-brand-300 px-3 py-1.5 rounded-md hover:bg-brand-100 dark:hover:bg-brand-900/50 transition-colors border border-brand-200 dark:border-brand-800">
+                    <i class="fas fa-magic"></i>
+                    <span data-i18n="importYesterdayBtn">Usar "Hoje" anterior como "Ontem"</span>
+                </button>
+            </div>
+
+            <!-- Input Cards -->
+            <div class="space-y-6 pt-2">
+                <!-- Yesterday -->
+                <div class="glass-panel rounded-xl p-5 shadow-sm border-l-4 border-l-green-500 relative group snow-topped">
+			        <img src="neve.png" alt="Neve" class="snow-cap">
+                    <div class="flex justify-between mb-2">
+                        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wide">
+                            <i class="fas fa-history mr-2 text-green-500"></i><span data-i18n="yesterdayLabel">O que fiz ontem</span>
+                        </label>
+                        <span class="text-xs text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity" data-i18n="shiftEnterHint">Shift+Enter para nova linha</span>
+                    </div>
+                    <textarea id="input-yesterday" rows="3" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-3 text-sm focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all placeholder-slate-400" data-i18n-placeholder="yesterdayPlaceholder" placeholder="- Finalizei a task X...&#10;- Code review do PR #123..."></textarea>
+                </div>
+
+                <!-- Today -->
+                <div class="glass-panel rounded-xl p-5 shadow-sm border-l-4 border-l-blue-500 relative group snow-topped">
+                    <img src="neve.png" alt="Neve" class="snow-cap2">
+                     <div class="flex justify-between mb-2">
+                        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wide">
+                            <i class="fas fa-crosshairs mr-2 text-blue-500"></i><span data-i18n="todayLabel">O que farei hoje</span>
+                        </label>
+                    </div>
+                    <textarea id="input-today" rows="3" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all placeholder-slate-400" data-i18n-placeholder="todayPlaceholder" placeholder="- Iniciar desenvolvimento da feature Y...&#10;- Reunião de alinhamento com Design..."></textarea>
+                </div>
+
+                <!-- Blockers -->
+                <div class="glass-panel rounded-xl p-5 shadow-sm border-l-4 border-l-red-500 relative group snow-topped">
+                    <img src="neve.png" alt="Neve" class="snow-cap3">
+                     <div class="flex justify-between mb-2">
+                        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wide">
+                            <i class="fas fa-ban mr-2 text-red-500"></i><span data-i18n="blockersLabel">Impedimentos</span>
+                        </label>
+                    </div>
+                    <textarea id="input-blockers" rows="2" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-3 text-sm focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all placeholder-slate-400" data-i18n-placeholder="blockersPlaceholder" placeholder="Nenhum impedimento no momento."></textarea>
+                </div>
+            </div>
+            
+            <!-- Quick Tags -->
+            <div id="quick-tags-container" class="flex gap-2 flex-wrap">
+                <!-- Tags serão renderizadas dinamicamente aqui -->
+            </div>
+        </div>
+
+        <!-- Column Right: Preview & Tools (4 cols) -->
+        <div class="lg:col-span-5 space-y-6">
+            
+            <!-- Timer Card -->
+            <!-- Snow not added here to keep timer clean, but you can add snow-topped class if desired -->
+            <div class="bg-gradient-to-br from-brand-600 to-brand-800 rounded-xl p-6 text-white shadow-lg relative overflow-hidden mt-2">
+                <div class="absolute top-0 right-0 p-4 opacity-10">
+                    <i class="fas fa-stopwatch text-6xl"></i>
+                </div>
+                <h3 class="text-sm font-medium text-brand-100 mb-1" data-i18n="timerTitle">Tempo de Fala</h3>
+                <div class="flex items-end gap-2 mb-4">
+                    <span id="timer-display" class="text-5xl font-bold font-mono tracking-tighter">02:00</span>
+                    <span class="text-sm text-brand-200 mb-2">min</span>
+                </div>
+                
+                <div class="flex gap-2 relative z-10">
+                    <button onclick="toggleTimer()" id="btn-timer-toggle" class="flex-1 bg-white text-brand-700 hover:bg-brand-50 py-2 rounded-lg font-bold transition flex justify-center items-center gap-2">
+                        <i class="fas fa-play"></i> <span data-i18n="timerStart">Iniciar</span>
+                    </button>
+                    <button onclick="resetTimer()" class="px-4 bg-brand-700 hover:bg-brand-900 text-white rounded-lg transition border border-brand-500">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                </div>
+                
+                <!-- Progress Bar -->
+                <div class="w-full bg-brand-900/50 h-1.5 rounded-full mt-4 overflow-hidden">
+                    <div id="timer-progress" class="bg-green-400 h-full w-full transition-all duration-1000"></div>
+                </div>
+            </div>
+
+            <!-- Preview Card -->
+            <div class="glass-panel rounded-xl shadow-md flex flex-col h-[400px]">
+                <div class="p-4 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-800/50 rounded-t-xl">
+                    <h3 class="font-bold text-slate-700 dark:text-slate-200">
+                        <i class="fas fa-eye mr-2 text-slate-400"></i><span data-i18n="preview">Preview</span>
+                    </h3>
+                    
+                    <div class="flex items-center gap-3">
+                        <!-- Format Toggle -->
+                        <div class="flex bg-slate-200 dark:bg-slate-700 rounded-lg p-0.5">
+                            <button onclick="setFormat('rich')" id="fmt-rich" class="px-3 py-1 text-xs rounded-md bg-white dark:bg-slate-600 shadow-sm font-medium transition-all">Rich</button>
+                            <button onclick="setFormat('slack')" id="fmt-slack" class="px-3 py-1 text-xs rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300 transition-all">Slack</button>
+                        </div>
+                        
+                        <!-- Expand Button -->
+                        <button onclick="expandPreview()" class="expand-btn p-2 rounded-lg bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 transition-all text-slate-600 dark:text-slate-300" data-i18n-title="expandPreview" title="Expandir Preview (Esc para fechar)">
+                            <i class="fas fa-expand expand-icon transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="preview-area" class="flex-grow p-4 overflow-y-auto text-sm leading-relaxed text-slate-700 dark:text-slate-300 markdown-preview"></div>
+                
+                <div class="p-4 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 rounded-b-xl flex gap-2">
+                    <button onclick="saveDaily()" class="flex-1 bg-brand-600 dark:bg-brand-500 text-white py-2.5 rounded-lg font-medium hover:opacity-90 transition shadow-lg flex justify-center items-center gap-2 group">
+                        <i class="fas fa-save group-hover:scale-110 transition-transform"></i> <span data-i18n="save">Salvar</span>
+                    </button>
+                    <button onclick="copyToClipboard()" id="btn-copy" class="flex-1 bg-slate-900 dark:bg-slate-700 text-white py-2.5 rounded-lg font-medium hover:opacity-90 transition shadow-lg flex justify-center items-center gap-2 group">
+                        <i class="fas fa-copy group-hover:scale-110 transition-transform"></i> <span data-i18n="copy">Copiar</span>
+                    </button>
+                    <button onclick="toggleHistory()" class="px-3 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition" data-i18n-title="viewHistory" title="Ver Histórico">
+                        <i class="fas fa-history"></i>
+                    </button>
+                    <button onclick="shareAPI()" class="px-3 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition" data-i18n-title="shareNative" title="Compartilhar nativo (Mobile)">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Preview Expanded Modal -->
+    <div id="preview-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="preview-modal-enter bg-white dark:bg-slate-800 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col">
+            <!-- Modal Header -->
+            <div class="p-5 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-900/50 rounded-t-2xl">
+                <div class="flex items-center gap-4">
+                    <h2 class="text-xl font-bold text-slate-800 dark:text-slate-100">
+                        <i class="fas fa-eye mr-2 text-brand-500"></i><span data-i18n="previewModalTitle">Preview da Daily</span>
+                    </h2>
+                    
+                    <!-- Format Toggle in Modal -->
+                    <div class="flex bg-slate-200 dark:bg-slate-700 rounded-lg p-0.5">
+                        <button onclick="setFormat('rich')" id="modal-fmt-rich" class="px-3 py-1 text-xs rounded-md bg-white dark:bg-slate-600 shadow-sm font-medium transition-all">Rich</button>
+                        <button onclick="setFormat('slack')" id="modal-fmt-slack" class="px-3 py-1 text-xs rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300 transition-all">Slack</button>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-2">
+                    <button onclick="openInNewTab()" class="p-2 rounded-lg bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 transition text-slate-600 dark:text-slate-300" data-i18n-title="openNewTab" title="Abrir em Nova Aba">
+                        <i class="fas fa-external-link-alt"></i>
+                    </button>
+                    <button onclick="closePreviewModal()" class="p-2 rounded-lg bg-slate-200 dark:bg-slate-700 hover:bg-red-100 dark:hover:bg-red-900/30 transition text-slate-600 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400" data-i18n-title="closeEsc" title="Fechar (Esc)">
+                        <i class="fas fa-times text-lg"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Modal Content -->
+            <div id="modal-preview-area" class="flex-grow p-6 overflow-y-auto text-base leading-relaxed text-slate-700 dark:text-slate-300 min-h-[300px] markdown-preview"></div>
+            
+            <!-- Modal Footer -->
+            <div class="p-5 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 rounded-b-2xl flex gap-3 justify-end">
+                <button onclick="copyToClipboardFromModal()" id="modal-btn-copy" class="bg-slate-900 dark:bg-slate-700 text-white px-6 py-2.5 rounded-lg font-medium hover:opacity-90 transition shadow-lg flex items-center gap-2">
+                    <i class="fas fa-copy"></i> <span data-i18n="copyText">Copiar Texto</span>
+                </button>
+                <button onclick="saveDaily(); closePreviewModal();" class="bg-brand-600 dark:bg-brand-500 text-white px-6 py-2.5 rounded-lg font-medium hover:opacity-90 transition shadow-lg flex items-center gap-2">
+                    <i class="fas fa-save"></i> <span data-i18n="saveDaily">Salvar Daily</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-800 rounded-xl shadow-2xl max-w-lg w-full max-h-[80vh] flex flex-col">
+            <div class="p-6 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
+                <h2 class="text-2xl font-bold text-slate-800 dark:text-slate-100">
+                    <i class="fas fa-cog mr-2 text-slate-500"></i><span data-i18n="settingsTitle">Configurações</span>
+                </h2>
+                <button onclick="toggleSettings()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="flex-grow overflow-y-auto p-6 space-y-6">
+                <!-- Preview Mode Setting -->
+                <div class="space-y-3">
+                    <h3 class="font-semibold text-slate-700 dark:text-slate-200 flex items-center gap-2">
+                        <i class="fas fa-eye text-brand-500"></i>
+                        <span data-i18n="settingsPreviewMode">Modo de Visualização do Preview</span>
+                    </h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400" data-i18n="settingsPreviewModeDesc">
+                        Escolha como o preview será exibido ao clicar no botão expandir.
+                    </p>
+                    
+                    <div class="space-y-2">
+                        <label class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-brand-500 dark:hover:border-brand-500 cursor-pointer transition-colors">
+                            <input type="radio" name="previewMode" value="modal" class="w-4 h-4 text-brand-600" onchange="updateSettings('previewMode', 'modal')">
+                            <div class="flex-grow">
+                                <span class="font-medium text-slate-700 dark:text-slate-200" data-i18n="settingsPreviewModal">Modal Expandido</span>
+                                <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="settingsPreviewModalDesc">Abre um modal de tela cheia sobre a página atual</p>
+                            </div>
+                            <i class="fas fa-expand text-slate-400"></i>
+                        </label>
+                        
+                        <label class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-brand-500 dark:hover:border-brand-500 cursor-pointer transition-colors">
+                            <input type="radio" name="previewMode" value="newtab" class="w-4 h-4 text-brand-600" onchange="updateSettings('previewMode', 'newtab')">
+                            <div class="flex-grow">
+                                <span class="font-medium text-slate-700 dark:text-slate-200" data-i18n="settingsPreviewNewTab">Nova Aba</span>
+                                <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="settingsPreviewNewTabDesc">Abre o preview em uma nova aba do navegador</p>
+                            </div>
+                            <i class="fas fa-external-link-alt text-slate-400"></i>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Timer Duration Setting -->
+                <div class="space-y-3">
+                    <h3 class="font-semibold text-slate-700 dark:text-slate-200 flex items-center gap-2">
+                        <i class="fas fa-stopwatch text-brand-500"></i>
+                        <span data-i18n="settingsTimerDuration">Duração do Timer</span>
+                    </h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400" data-i18n="settingsTimerDurationDesc">
+                        Defina o tempo padrão para o timer de fala.
+                    </p>
+                    
+                    <div class="flex items-center gap-3">
+                        <input 
+                            type="number" 
+                            id="settings-timer-duration"
+                            min="30" 
+                            max="600" 
+                            value="120"
+                            class="w-24 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-center font-mono"
+                            onchange="updateSettings('timerDuration', this.value)"
+                        >
+                        <span class="text-sm text-slate-500 dark:text-slate-400" data-i18n="settingsSeconds">segundos</span>
+                        
+                        <div class="flex gap-1 ml-auto">
+                            <button onclick="setTimerPreset(60)" class="px-3 py-1 text-xs bg-slate-200 dark:bg-slate-700 rounded hover:bg-slate-300 dark:hover:bg-slate-600 transition">1min</button>
+                            <button onclick="setTimerPreset(120)" class="px-3 py-1 text-xs bg-slate-200 dark:bg-slate-700 rounded hover:bg-slate-300 dark:hover:bg-slate-600 transition">2min</button>
+                            <button onclick="setTimerPreset(180)" class="px-3 py-1 text-xs bg-slate-200 dark:bg-slate-700 rounded hover:bg-slate-300 dark:hover:bg-slate-600 transition">3min</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Auto-save Setting -->
+                <div class="space-y-3">
+                    <h3 class="font-semibold text-slate-700 dark:text-slate-200 flex items-center gap-2">
+                        <i class="fas fa-save text-brand-500"></i>
+                        <span data-i18n="settingsAutoSave">Auto-salvar Rascunho</span>
+                    </h3>
+                    
+                    <label class="flex items-center gap-3 cursor-pointer">
+                        <input 
+                            type="checkbox" 
+                            id="settings-autosave"
+                            class="w-5 h-5 rounded text-brand-600"
+                            onchange="updateSettings('autoSave', this.checked)"
+                        >
+                        <span class="text-sm text-slate-600 dark:text-slate-300" data-i18n="settingsAutoSaveDesc">Salvar rascunho automaticamente enquanto digita</span>
+                    </label>
+                </div>
+                
+                <!-- Language Setting -->
+                <div class="space-y-3">
+                    <h3 class="font-semibold text-slate-700 dark:text-slate-200 flex items-center gap-2">
+                        <i class="fas fa-globe text-brand-500"></i>
+                        <span data-i18n="settingsLanguage">Idioma</span>
+                    </h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400" data-i18n="settingsLanguageDesc">
+                        Escolha o idioma da interface.
+                    </p>
+                    
+                    <div class="space-y-2">
+                        <label class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-brand-500 dark:hover:border-brand-500 cursor-pointer transition-colors">
+                            <input type="radio" name="language" value="pt-BR" class="w-4 h-4 text-brand-600" onchange="updateSettings('language', 'pt-BR')">
+                            <div class="flex-grow">
+                                <span class="font-medium text-slate-700 dark:text-slate-200">🇧🇷 Português (Brasil)</span>
+                            </div>
+                        </label>
+                        
+                        <label class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-brand-500 dark:hover:border-brand-500 cursor-pointer transition-colors">
+                            <input type="radio" name="language" value="en" class="w-4 h-4 text-brand-600" onchange="updateSettings('language', 'en')">
+                            <div class="flex-grow">
+                                <span class="font-medium text-slate-700 dark:text-slate-200">🇺🇸 English</span>
+                            </div>
+                        </label>
+                        
+                        <label class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-brand-500 dark:hover:border-brand-500 cursor-pointer transition-colors">
+                            <input type="radio" name="language" value="es" class="w-4 h-4 text-brand-600" onchange="updateSettings('language', 'es')">
+                            <div class="flex-grow">
+                                <span class="font-medium text-slate-700 dark:text-slate-200">🇪🇸 Español</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-4 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 flex justify-between items-center">
+                <button onclick="resetSettings()" class="text-sm text-orange-500 hover:text-orange-700 font-medium">
+                    <i class="fas fa-undo mr-1"></i><span data-i18n="settingsRestoreDefaults">Restaurar Padrões</span>
+                </button>
+                <button onclick="toggleSettings()" class="bg-brand-600 text-white px-4 py-2 rounded-lg font-medium hover:opacity-90 transition" data-i18n="settingsClose">
+                    Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- History Modal -->
+    <div id="history-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-800 rounded-xl shadow-2xl max-w-3xl w-full max-h-[80vh] flex flex-col">
+            <div class="p-6 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
+                <h2 class="text-2xl font-bold text-slate-800 dark:text-slate-100">
+                    <i class="fas fa-history mr-2 text-brand-600"></i><span data-i18n="historyTitle">Histórico de Dailies</span>
+                </h2>
+                <button onclick="toggleHistory()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div id="history-list" class="flex-grow overflow-y-auto p-6 space-y-3"></div>
+            
+            <div class="p-4 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 flex justify-between items-center">
+                <span class="text-sm text-slate-500 dark:text-slate-400">
+                    <i class="fas fa-info-circle mr-1"></i><span data-i18n="historyClickToLoad">Clique em uma entrada para carregar</span>
+                </span>
+                <button onclick="clearHistory()" class="text-sm text-red-500 hover:text-red-700 font-medium">
+                    <i class="fas fa-trash mr-1"></i><span data-i18n="historyClear">Limpar Histórico</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tags Configuration Modal -->
+    <div id="tags-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-800 rounded-xl shadow-2xl max-w-2xl w-full max-h-[80vh] flex flex-col">
+            <div class="p-6 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
+                <h2 class="text-2xl font-bold text-slate-800 dark:text-slate-100">
+                    <i class="fas fa-tags mr-2 text-purple-600"></i><span data-i18n="tagsTitle">Configurar Tags Rápidas</span>
+                </h2>
+                <button onclick="toggleTagsConfig()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="p-6 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50">
+                <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">
+                    <i class="fas fa-lightbulb mr-1 text-yellow-500"></i>
+                    <span data-i18n="tagsDescription">Tags são atalhos de texto que podem ser inseridos rapidamente nos campos. Use para mensagens frequentes como "[CR]", "[WIP]", etc.</span>
+                </p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2">
+                    <input 
+                        type="text" 
+                        id="new-tag-text" 
+                        data-i18n-placeholder="tagsTextPlaceholder"
+                        placeholder="Texto (ex: [CR])" 
+                        class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none"
+                    >
+                    <input 
+                        type="text" 
+                        id="new-tag-label" 
+                        data-i18n-placeholder="tagsLabelPlaceholder"
+                        placeholder="Nome (ex: Code Review)" 
+                        class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none"
+                    >
+                    <select 
+                        id="new-tag-color" 
+                        class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none"
+                    >
+                        <option value="slate" data-i18n="colorGray">Cinza</option>
+                        <option value="blue" data-i18n="colorBlue">Azul</option>
+                        <option value="green" data-i18n="colorGreen">Verde</option>
+                        <option value="yellow" data-i18n="colorYellow">Amarelo</option>
+                        <option value="red" data-i18n="colorRed">Vermelho</option>
+                        <option value="purple" data-i18n="colorPurple">Roxo</option>
+                    </select>
+                    <button 
+                        onclick="addNewTag()" 
+                        class="w-full bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2 justify-center whitespace-nowrap"
+                    >
+                        <i class="fas fa-plus"></i> <span data-i18n="tagsAdd">Adicionar</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div id="tags-list" class="flex-grow overflow-y-auto p-6 space-y-2"></div>
+            
+            <div class="p-4 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 flex justify-between items-center">
+                <span class="text-sm text-slate-500 dark:text-slate-400">
+                    <i class="fas fa-info-circle mr-1"></i><span data-i18n="tagsDragHint">Arraste para reordenar (em breve)</span>
+                </span>
+                <button onclick="resetTagsToDefault()" class="text-sm text-orange-500 hover:text-orange-700 font-medium">
+                    <i class="fas fa-undo mr-1"></i><span data-i18n="tagsRestoreDefault">Restaurar Padrão</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import File Input (Hidden) -->
+    <input type="file" id="import-file-input" accept=".json" class="hidden">
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+        <div class="bg-slate-800 dark:bg-white text-white dark:text-slate-900 px-6 py-3 rounded-lg shadow-2xl flex items-center gap-3 font-medium">
+            <i class="fas fa-check-circle text-green-500 text-lg"></i>
+            <span id="toast-message">Copiado para a área de transferência!</span>
+        </div>
+    </div>
+
+    <script>
+        // --- State Management ---
+        const state = {
+            yesterday: '',
+            today: '',
+            blockers: '',
+            mood: '🚀',
+            format: 'rich',
+            timerInitial: 120,
+            timerCurrent: 120,
+            timerInterval: null,
+            isRunning: false,
+            customTags: [],
+            lastFocusedInput: null,
+            plainTextPreview: '',
+            settings: {
+                previewMode: 'modal',
+                timerDuration: 120,
+                autoSave: true,
+                language: 'pt-BR'
+            }
+        };
+        
+        // Default tags
+        const defaultTags = [
+            { text: '[CR]', label: 'Code Review', color: 'slate' },
+            { text: '[WIP]', label: 'WIP', color: 'blue' },
+            { text: '[MEETING]', label: 'Reunião', color: 'green' },
+            { text: '[BLOCKED]', label: 'Bloqueado', color: 'red' },
+            { text: '[TESTING]', label: 'Testando', color: 'yellow' },
+            { text: '[DEPLOY]', label: 'Deploy', color: 'purple' }
+        ];
+        
+        // Internationalization (i18n)
+        const translations = {
+            'pt-BR': {
+                // Navbar
+                navTitle: 'Daily Scrum Organizer',
+                navConfig: 'Config',
+                navTags: 'Tags',
+                navExport: 'Exportar',
+                navImport: 'Importar',
+                navClearAll: 'Limpar Tudo',
+                
+                // Context Bar
+                mood: 'Humor',
+                moodEnergized: 'Energizado',
+                moodGood: 'Bem',
+                moodNormal: 'Normal',
+                moodOverwhelmed: 'Sobrecarregado',
+                moodSick: 'Doente/Indisposto',
+                importYesterdayBtn: 'Usar "Hoje" anterior como "Ontem"',
+                
+                // Input Cards
+                yesterdayLabel: 'O que fiz ontem',
+                todayLabel: 'O que farei hoje',
+                blockersLabel: 'Impedimentos',
+                shiftEnterHint: 'Shift+Enter para nova linha',
+                yesterdayPlaceholder: '- Finalizei a task X...\n- Code review do PR #123...',
+                todayPlaceholder: '- Iniciar desenvolvimento da feature Y...\n- Reunião de alinhamento com Design...',
+                blockersPlaceholder: 'Nenhum impedimento no momento.',
+                
+                // Timer
+                timerTitle: 'Tempo de Fala',
+                timerStart: 'Iniciar',
+                timerPause: 'Pausar',
+                timerContinue: 'Continuar',
+                timerEnd: 'Fim',
+                
+                // Preview
+                preview: 'Preview',
+                previewYesterday: 'ONTEM',
+                previewToday: 'HOJE',
+                previewBlockers: 'IMPEDIMENTOS',
+                previewNone: 'Nenhum',
+                previewPlanning: '(Planejando...)',
+                save: 'Salvar',
+                copy: 'Copiar',
+                copied: 'Copiado!',
+                expandPreview: 'Expandir Preview (Esc para fechar)',
+                viewHistory: 'Ver Histórico',
+                shareNative: 'Compartilhar nativo (Mobile)',
+                
+                // Preview Modal
+                previewModalTitle: 'Preview da Daily',
+                openNewTab: 'Abrir em Nova Aba',
+                closeEsc: 'Fechar (Esc)',
+                copyText: 'Copiar Texto',
+                saveDaily: 'Salvar Daily',
+                
+                // Settings Modal
+                settingsTitle: 'Configurações',
+                settingsPreviewMode: 'Modo de Visualização do Preview',
+                settingsPreviewModeDesc: 'Escolha como o preview será exibido ao clicar no botão expandir.',
+                settingsPreviewModal: 'Modal Expandido',
+                settingsPreviewModalDesc: 'Abre um modal de tela cheia sobre a página atual',
+                settingsPreviewNewTab: 'Nova Aba',
+                settingsPreviewNewTabDesc: 'Abre o preview em uma nova aba do navegador',
+                settingsTimerDuration: 'Duração do Timer',
+                settingsTimerDurationDesc: 'Defina o tempo padrão para o timer de fala.',
+                settingsSeconds: 'segundos',
+                settingsAutoSave: 'Auto-salvar Rascunho',
+                settingsAutoSaveDesc: 'Salvar rascunho automaticamente enquanto digita',
+                settingsLanguage: 'Idioma',
+                settingsLanguageDesc: 'Escolha o idioma da interface.',
+                settingsRestoreDefaults: 'Restaurar Padrões',
+                settingsClose: 'Fechar',
+                settingsSaved: 'Configuração salva!',
+                settingsRestored: 'Configurações restauradas!',
+                
+                // History Modal
+                historyTitle: 'Histórico de Dailies',
+                historyEmpty: 'Nenhuma daily salva ainda.',
+                historyEmptyHint: 'Clique em "Salvar" para guardar sua daily.',
+                historyClickToLoad: 'Clique em uma entrada para carregar',
+                historyClear: 'Limpar Histórico',
+                historyLoaded: 'Daily carregada do histórico!',
+                historyDeleted: 'Daily removida do histórico.',
+                historyCleared: 'Histórico limpo com sucesso.',
+                
+                // Tags Modal
+                tagsTitle: 'Configurar Tags Rápidas',
+                tagsDescription: 'Tags são atalhos de texto que podem ser inseridos rapidamente nos campos. Use para mensagens frequentes como "[CR]", "[WIP]", etc.',
+                tagsTextPlaceholder: 'Texto (ex: [CR])',
+                tagsLabelPlaceholder: 'Nome (ex: Code Review)',
+                tagsAdd: 'Adicionar',
+                tagsEmpty: 'Nenhuma tag configurada.',
+                tagsEmptyHint: 'Use o formulário acima para adicionar tags rápidas.',
+                tagsDragHint: 'Arraste para reordenar (em breve)',
+                tagsRestoreDefault: 'Restaurar Padrão',
+                tagsAdded: 'Tag adicionada!',
+                tagsDeleted: 'Tag removida.',
+                tagsRestored: 'Tags restauradas!',
+                tagsClickFieldFirst: 'Clique em um campo de texto primeiro!',
+                tagsFillFields: 'Preencha o texto e o nome da tag.',
+                tagsDeleteConfirm: 'Tem certeza que deseja deletar esta tag?',
+                tagsRestoreConfirm: 'Restaurar tags para o padrão original?',
+                
+                // Colors
+                colorGray: 'Cinza',
+                colorBlue: 'Azul',
+                colorGreen: 'Verde',
+                colorYellow: 'Amarelo',
+                colorRed: 'Vermelho',
+                colorPurple: 'Roxo',
+                
+                // Toasts & Confirmations
+                copiedSuccess: 'Copiado com sucesso!',
+                copyError: 'Erro ao copiar. Tente novamente.',
+                sharedSuccess: 'Compartilhado com sucesso!',
+                shareNotSupported: 'Compartilhamento não suportado neste navegador.',
+                dailySaved: 'Daily salva no histórico!',
+                dailySaveError: 'Preencha pelo menos um campo antes de salvar.',
+                importedFromLast: 'Importado do último registro!',
+                importNoToday: 'Última entrada não tem dados "Hoje".',
+                importNoHistory: 'Nenhum histórico encontrado.',
+                dataCleared: 'Dados limpos!',
+                dataExported: 'Dados exportados!',
+                dataImported: 'Dados importados com sucesso!',
+                dataImportError: 'Erro ao importar. Verifique o arquivo.',
+                timerFinished: 'Tempo finalizado!',
+                clearAllConfirm: 'Limpar todos os campos e o rascunho salvo?',
+                clearHistoryConfirm: 'Tem certeza que deseja limpar TODO o histórico? Esta ação não pode ser desfeita!',
+                deleteHistoryConfirm: 'Tem certeza que deseja deletar esta daily do histórico?',
+                
+                // Date formatting
+                dateFormat: 'pt-BR'
+            },
+            'en': {
+                // Navbar
+                navTitle: 'Daily Scrum Organizer',
+                navConfig: 'Settings',
+                navTags: 'Tags',
+                navExport: 'Export',
+                navImport: 'Import',
+                navClearAll: 'Clear All',
+                
+                // Context Bar
+                mood: 'Mood',
+                moodEnergized: 'Energized',
+                moodGood: 'Good',
+                moodNormal: 'Normal',
+                moodOverwhelmed: 'Overwhelmed',
+                moodSick: 'Sick/Unwell',
+                importYesterdayBtn: 'Use previous "Today" as "Yesterday"',
+                
+                // Input Cards
+                yesterdayLabel: 'What I did yesterday',
+                todayLabel: 'What I will do today',
+                blockersLabel: 'Blockers',
+                shiftEnterHint: 'Shift+Enter for new line',
+                yesterdayPlaceholder: '- Finished task X...\n- Code review for PR #123...',
+                todayPlaceholder: '- Start developing feature Y...\n- Alignment meeting with Design...',
+                blockersPlaceholder: 'No blockers at the moment.',
+                
+                // Timer
+                timerTitle: 'Speaking Time',
+                timerStart: 'Start',
+                timerPause: 'Pause',
+                timerContinue: 'Continue',
+                timerEnd: 'End',
+                
+                // Preview
+                preview: 'Preview',
+                previewYesterday: 'YESTERDAY',
+                previewToday: 'TODAY',
+                previewBlockers: 'BLOCKERS',
+                previewNone: 'None',
+                previewPlanning: '(Planning...)',
+                save: 'Save',
+                copy: 'Copy',
+                copied: 'Copied!',
+                expandPreview: 'Expand Preview (Esc to close)',
+                viewHistory: 'View History',
+                shareNative: 'Share (Mobile)',
+                
+                // Preview Modal
+                previewModalTitle: 'Daily Preview',
+                openNewTab: 'Open in New Tab',
+                closeEsc: 'Close (Esc)',
+                copyText: 'Copy Text',
+                saveDaily: 'Save Daily',
+                
+                // Settings Modal
+                settingsTitle: 'Settings',
+                settingsPreviewMode: 'Preview Display Mode',
+                settingsPreviewModeDesc: 'Choose how the preview will be displayed when clicking the expand button.',
+                settingsPreviewModal: 'Expanded Modal',
+                settingsPreviewModalDesc: 'Opens a fullscreen modal over the current page',
+                settingsPreviewNewTab: 'New Tab',
+                settingsPreviewNewTabDesc: 'Opens the preview in a new browser tab',
+                settingsTimerDuration: 'Timer Duration',
+                settingsTimerDurationDesc: 'Set the default time for the speaking timer.',
+                settingsSeconds: 'seconds',
+                settingsAutoSave: 'Auto-save Draft',
+                settingsAutoSaveDesc: 'Automatically save draft while typing',
+                settingsLanguage: 'Language',
+                settingsLanguageDesc: 'Choose the interface language.',
+                settingsRestoreDefaults: 'Restore Defaults',
+                settingsClose: 'Close',
+                settingsSaved: 'Setting saved!',
+                settingsRestored: 'Settings restored!',
+                
+                // History Modal
+                historyTitle: 'Daily History',
+                historyEmpty: 'No dailies saved yet.',
+                historyEmptyHint: 'Click "Save" to store your daily.',
+                historyClickToLoad: 'Click an entry to load',
+                historyClear: 'Clear History',
+                historyLoaded: 'Daily loaded from history!',
+                historyDeleted: 'Daily removed from history.',
+                historyCleared: 'History cleared successfully.',
+                
+                // Tags Modal
+                tagsTitle: 'Configure Quick Tags',
+                tagsDescription: 'Tags are text shortcuts that can be quickly inserted into fields. Use for frequent messages like "[CR]", "[WIP]", etc.',
+                tagsTextPlaceholder: 'Text (e.g., [CR])',
+                tagsLabelPlaceholder: 'Label (e.g., Code Review)',
+                tagsAdd: 'Add',
+                tagsEmpty: 'No tags configured.',
+                tagsEmptyHint: 'Use the form above to add quick tags.',
+                tagsDragHint: 'Drag to reorder (coming soon)',
+                tagsRestoreDefault: 'Restore Default',
+                tagsAdded: 'Tag added!',
+                tagsDeleted: 'Tag removed.',
+                tagsRestored: 'Tags restored!',
+                tagsClickFieldFirst: 'Click on a text field first!',
+                tagsFillFields: 'Fill in the text and tag name.',
+                tagsDeleteConfirm: 'Are you sure you want to delete this tag?',
+                tagsRestoreConfirm: 'Restore tags to original defaults?',
+                
+                // Colors
+                colorGray: 'Gray',
+                colorBlue: 'Blue',
+                colorGreen: 'Green',
+                colorYellow: 'Yellow',
+                colorRed: 'Red',
+                colorPurple: 'Purple',
+                
+                // Toasts & Confirmations
+                copiedSuccess: 'Copied successfully!',
+                copyError: 'Error copying. Please try again.',
+                sharedSuccess: 'Shared successfully!',
+                shareNotSupported: 'Sharing not supported in this browser.',
+                dailySaved: 'Daily saved to history!',
+                dailySaveError: 'Fill in at least one field before saving.',
+                importedFromLast: 'Imported from last entry!',
+                importNoToday: 'Last entry has no "Today" data.',
+                importNoHistory: 'No history found.',
+                dataCleared: 'Data cleared!',
+                dataExported: 'Data exported!',
+                dataImported: 'Data imported successfully!',
+                dataImportError: 'Error importing. Check the file.',
+                timerFinished: 'Time is up!',
+                clearAllConfirm: 'Clear all fields and saved draft?',
+                clearHistoryConfirm: 'Are you sure you want to clear ALL history? This action cannot be undone!',
+                deleteHistoryConfirm: 'Are you sure you want to delete this daily from history?',
+                
+                // Date formatting
+                dateFormat: 'es-ES'
+            }
+        };
+        
+        // Get translation helper
+        function t(key) {
+            const lang = state.settings.language || 'pt-BR';
+            return translations[lang]?.[key] || translations['en'][key] || key;
+        }
+
+        // --- Elements ---
+        const els = {
+            inputYesterday: document.getElementById('input-yesterday'),
+            inputToday: document.getElementById('input-today'),
+            inputBlockers: document.getElementById('input-blockers'),
+            previewArea: document.getElementById('preview-area'),
+            modalPreviewArea: document.getElementById('modal-preview-area'),
+            timerDisplay: document.getElementById('timer-display'),
+            timerProgress: document.getElementById('timer-progress'),
+            btnTimerToggle: document.getElementById('btn-timer-toggle'),
+            moodBtns: document.querySelectorAll('.mood-btn'),
+            fmtRich: document.getElementById('fmt-rich'),
+            fmtSlack: document.getElementById('fmt-slack'),
+            modalFmtRich: document.getElementById('modal-fmt-rich'),
+            modalFmtSlack: document.getElementById('modal-fmt-slack'),
+            themeIconMoon: document.getElementById('theme-icon-moon'),
+            themeIconSun: document.getElementById('theme-icon-sun')
+        };
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check system dark mode and update icons
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+                updateThemeIcons();
+            }
+            
+            loadSettings();
+            loadCustomTags();
+            loadFromStorage();
+            
+            // Attach focus listeners to track where to insert tags
+            [els.inputYesterday, els.inputToday, els.inputBlockers].forEach(el => {
+                el.addEventListener('focus', () => { 
+                    state.lastFocusedInput = el; 
+                });
+                
+                el.addEventListener('input', (e) => {
+                    updateStateFromDOM();
+                    renderPreview();
+                });
+            });
+            
+            // Set default focus
+            state.lastFocusedInput = els.inputYesterday;
+            
+            // Initialize mood button visual state
+            updateMoodButtons();
+            
+            renderPreview();
+            renderQuickTags();
+            
+            // Keyboard shortcut for closing modal
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closePreviewModal();
+                    document.getElementById('history-modal').classList.add('hidden');
+                    document.getElementById('tags-modal').classList.add('hidden');
+                    document.getElementById('settings-modal').classList.add('hidden');
+                }
+            });
+        });
+
+        // --- Settings Management ---
+        function loadSettings() {
+            const saved = localStorage.getItem('dailyScrumSettings');
+            if (saved) {
+                try {
+                    state.settings = { ...state.settings, ...JSON.parse(saved) };
+                } catch (e) {
+                    console.error('Erro ao carregar configurações:', e);
+                }
+            }
+            applySettings();
+        }
+        
+        function saveSettings() {
+            localStorage.setItem('dailyScrumSettings', JSON.stringify(state.settings));
+        }
+        
+        function applySettings() {
+            // Apply preview mode
+            document.querySelector(`input[name="previewMode"][value="${state.settings.previewMode}"]`).checked = true;
+            
+            // Apply timer duration
+            document.getElementById('settings-timer-duration').value = state.settings.timerDuration;
+            state.timerInitial = state.settings.timerDuration;
+            state.timerCurrent = state.settings.timerDuration;
+            updateTimerUI();
+            
+            // Apply auto-save
+            document.getElementById('settings-autosave').checked = state.settings.autoSave;
+            
+            // Apply language
+            const langRadio = document.querySelector(`input[name="language"][value="${state.settings.language}"]`);
+            if (langRadio) langRadio.checked = true;
+            
+            // Update UI with translations
+            updateUILanguage();
+        }
+        
+        function updateUILanguage() {
+            // Update document title
+            document.title = t('navTitle');
+            
+            // Update navbar
+            document.querySelector('[data-i18n="navTitle"]')?.textContent && (document.querySelector('[data-i18n="navTitle"]').innerHTML = t('navTitle') + ' <span class="text-red-600"></span> 🎅');
+            
+            // Update all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (key !== 'navTitle' && translations[state.settings.language]?.[key]) {
+                    el.textContent = t(key);
+                }
+            });
+            
+            // Update placeholders
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (translations[state.settings.language]?.[key]) {
+                    el.placeholder = t(key);
+                }
+            });
+            
+            // Update titles
+            document.querySelectorAll('[data-i18n-title]').forEach(el => {
+                const key = el.getAttribute('data-i18n-title');
+                if (translations[state.settings.language]?.[key]) {
+                    el.title = t(key);
+                }
+            });
+            
+            // Re-render components that need translation
+            renderPreview();
+            renderQuickTags();
+        }
+        
+        function updateSettings(key, value) {
+            state.settings[key] = value;
+            
+            if (key === 'timerDuration') {
+                state.timerInitial = parseInt(value);
+                state.timerCurrent = parseInt(value);
+                updateTimerUI();
+            }
+            
+            if (key === 'language') {
+                updateUILanguage();
+            }
+            
+            saveSettings();
+            showToast('✅ ' + t('settingsSaved'));
+        }
+        
+        function setTimerPreset(seconds) {
+            document.getElementById('settings-timer-duration').value = seconds;
+            updateSettings('timerDuration', seconds);
+        }
+        
+        function resetSettings() {
+            state.settings = {
+                previewMode: 'modal',
+                timerDuration: 120,
+                autoSave: true,
+                language: 'pt-BR'
+            };
+            saveSettings();
+            applySettings();
+            showToast('⚙️ ' + t('settingsRestored'));
+        }
+        
+        function toggleSettings() {
+            const modal = document.getElementById('settings-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        // --- Preview Modal ---
+        function expandPreview() {
+            if (state.settings.previewMode === 'newtab') {
+                openInNewTab();
+            } else {
+                openPreviewModal();
+            }
+        }
+        
+        function openPreviewModal() {
+            const modal = document.getElementById('preview-modal');
+            modal.classList.remove('hidden');
+            updateModalPreview();
+        }
+        
+        function closePreviewModal() {
+            const modal = document.getElementById('preview-modal');
+            modal.classList.add('hidden');
+        }
+        
+        function updateModalPreview() {
+            els.modalPreviewArea.innerHTML = els.previewArea.innerHTML;
+        }
+        
+        function openInNewTab() {
+            const previewHTML = els.previewArea.innerHTML;
+            const plainText = state.plainTextPreview;
+            const isDark = document.documentElement.classList.contains('dark');
+            
+            const html = `
+<!DOCTYPE html>
+<html lang="pt-BR" class="${isDark ? 'dark' : ''}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview - Daily Scrum</title>
+    <script src="https://cdn.tailwindcss.com"><\/script>
+    <script>
+        tailwind.config = { darkMode: 'class' }
+    <\/script>
+    <style>
+        body { font-family: 'Segoe UI', system-ui, sans-serif; }
+        .markdown-preview { line-height: 1.7; }
+        .markdown-preview h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e2e8f0; }
+        .dark .markdown-preview h1 { border-bottom-color: #475569; }
+        .markdown-preview h2 { font-size: 1.25rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.5rem; }
+        .markdown-preview h3 { font-size: 1.1rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.5rem; }
+        .markdown-preview p { margin-bottom: 0.75rem; }
+        .markdown-preview strong { font-weight: 700; color: #1e293b; }
+        .dark .markdown-preview strong { color: #f1f5f9; }
+        .markdown-preview ul, .markdown-preview ol { margin-left: 1.5rem; margin-bottom: 0.75rem; }
+        .markdown-preview ul { list-style-type: disc; }
+        .markdown-preview ol { list-style-type: decimal; }
+        .markdown-preview li { margin-bottom: 0.35rem; }
+        .markdown-preview li::marker { color: #64748b; }
+        .markdown-preview blockquote { border-left: 4px solid #ef4444; padding-left: 1rem; margin: 0.75rem 0; background: rgba(239, 68, 68, 0.1); padding: 0.5rem 1rem; border-radius: 0 0.5rem 0.5rem 0; color: #b91c1c; }
+        .dark .markdown-preview blockquote { background: rgba(239, 68, 68, 0.15); color: #fca5a5; }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-100 dark:bg-slate-900 p-8">
+    <div class="max-w-2xl mx-auto">
+        <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-8">
+            <div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-200 dark:border-slate-700">
+                <h1 class="text-2xl font-bold text-slate-800 dark:text-white">📋 Daily Scrum</h1>
+                <span class="text-sm text-slate-500 dark:text-slate-400">${new Date().toLocaleDateString('pt-BR')}</span>
+            </div>
+            <div class="markdown-preview text-slate-700 dark:text-slate-300">${previewHTML}</div>
+            <div class="mt-6 pt-4 border-t border-slate-200 dark:border-slate-700 flex gap-3">
+                <button onclick="navigator.clipboard.writeText(\`${plainText.replace(/`/g, '\\`').replace(/\\/g, '\\\\')}\`).then(() => alert('Copiado!'))" class="bg-slate-900 dark:bg-slate-700 text-white px-4 py-2 rounded-lg text-sm hover:opacity-90">
+                    📋 Copiar
+                </button>
+                <button onclick="window.print()" class="bg-slate-200 dark:bg-slate-600 text-slate-700 dark:text-white px-4 py-2 rounded-lg text-sm hover:opacity-90">
+                    🖨️ Imprimir
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>`;
+            
+            const blob = new Blob([html], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            window.open(url, '_blank');
+        }
+        
+        function copyToClipboardFromModal() {
+            const textToCopy = state.plainTextPreview;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showToast('✅ ' + t('copiedSuccess'));
+                
+                const btn = document.getElementById('modal-btn-copy');
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = `<i class="fas fa-check"></i> ${t('copied')}`;
+                setTimeout(() => { btn.innerHTML = originalHTML; }, 2000);
+            }).catch(err => {
+                showToast('❌ ' + t('copyError'), true);
+            });
+        }
+
+        // --- Core Logic ---
+        function updateStateFromDOM() {
+            state.yesterday = els.inputYesterday.value;
+            state.today = els.inputToday.value;
+            state.blockers = els.inputBlockers.value;
+            
+            // Auto-save if enabled
+            if (state.settings.autoSave) {
+                saveToStorage();
+            }
+        }
+
+        function renderPreview() {
+            let markdown = '';
+            let plainText = '';
+            
+            if (state.format === 'rich') {
+                // Markdown formatting
+                markdown += `## ${state.mood} ${t('mood')}\n\n`;
+                markdown += `### ✅ ${t('previewYesterday')}\n${formatListMarkdown(state.yesterday)}\n\n`;
+                markdown += `### 🎯 ${t('previewToday')}\n${formatListMarkdown(state.today)}\n\n`;
+                
+                if (state.blockers && state.blockers.trim().length > 0) {
+                    markdown += `### ⛔ ${t('previewBlockers')}\n> ${state.blockers.replace(/\n/g, '\n> ')}`;
+                } else {
+                    markdown += `### ⛔ ${t('previewBlockers')}\n*${t('previewNone')}*`;
+                }
+                
+                // Plain text for copying
+                plainText += `${t('mood')}: ${state.mood}\n\n`;
+                plainText += `✅ **${t('previewYesterday')}**\n${formatList(state.yesterday)}\n\n`;
+                plainText += `🎯 **${t('previewToday')}**\n${formatList(state.today)}\n\n`;
+                if (state.blockers && state.blockers.trim().length > 0) {
+                    plainText += `⛔ **${t('previewBlockers')}**\n${state.blockers}`;
+                } else {
+                    plainText += `⛔ **${t('previewBlockers')}**\n${t('previewNone')}`;
+                }
+            } else {
+                // Slack/Teams friendly formatting
+                markdown += `**${t('mood')}:** ${state.mood}\n\n`;
+                markdown += `**${t('previewYesterday')}:**\n${formatListMarkdown(state.yesterday)}\n\n`;
+                markdown += `**${t('previewToday')}:**\n${formatListMarkdown(state.today)}\n\n`;
+                
+                if (state.blockers && state.blockers.trim().length > 0) {
+                    markdown += `**${t('previewBlockers')}:**\n> ${state.blockers.replace(/\n/g, '\n> ')}`;
+                } else {
+                    markdown += `**${t('previewBlockers')}:** *${t('previewNone')}*`;
+                }
+                
+                // Plain text for Slack
+                plainText += `*${t('mood')}:* ${state.mood}\n\n`;
+                plainText += `*${t('previewYesterday')}:*\n${formatList(state.yesterday)}\n\n`;
+                plainText += `*${t('previewToday')}:*\n${formatList(state.today)}\n\n`;
+                if (state.blockers && state.blockers.trim().length > 0) {
+                    plainText += `*${t('previewBlockers')}:*\n> ${state.blockers.replace(/\n/g, '\n> ')}`;
+                } else {
+                    plainText += `*${t('previewBlockers')}:* ${t('previewNone')}`;
+                }
+            }
+
+            // Store plain text for copying
+            state.plainTextPreview = plainText;
+            
+            // Render markdown to HTML
+            const htmlContent = marked.parse(markdown);
+            els.previewArea.innerHTML = htmlContent;
+            
+            // Also update modal if open
+            if (!document.getElementById('preview-modal').classList.contains('hidden')) {
+                els.modalPreviewArea.innerHTML = htmlContent;
+            }
+            
+            // Update format toggle in modal too
+            updateFormatToggleUI();
+        }
+        
+        function formatListMarkdown(text) {
+            if (!text || !text.trim()) return `- *(${t('previewPlanning')})*`;
+            return text.split('\n').map(line => {
+                line = line.trim();
+                if (!line) return '';
+                // Remove existing bullets/dashes and add markdown list format
+                if (line.startsWith('-') || line.startsWith('•')) {
+                    return line.replace(/^[-•]\s*/, '- ');
+                }
+                return `- ${line}`;
+            }).filter(l => l).join('\n');
+        }
+
+        function formatList(text) {
+            if (!text || !text.trim()) return `   - (${t('previewPlanning')})`;
+            return text.split('\n').map(line => {
+                line = line.trim();
+                if (!line) return '';
+                if (line.startsWith('-') || line.startsWith('•')) return line;
+                return `• ${line}`;
+            }).filter(l => l).join('\n');
+        }
+
+        function setMood(mood) {
+            state.mood = mood;
+            updateMoodButtons();
+            renderPreview();
+            saveToStorage();
+        }
+
+        function updateMoodButtons() {
+            els.moodBtns.forEach(btn => {
+                if(btn.dataset.mood === state.mood) {
+                    btn.classList.remove('grayscale');
+                    btn.classList.add('scale-125', 'bg-slate-100', 'dark:bg-slate-700');
+                } else {
+                    btn.classList.add('grayscale');
+                    btn.classList.remove('scale-125', 'bg-slate-100', 'dark:bg-slate-700');
+                }
+            });
+        }
+
+        function setFormat(fmt) {
+            state.format = fmt;
+            updateFormatToggleUI();
+            renderPreview();
+        }
+        
+        function updateFormatToggleUI() {
+            const activeClass = 'px-3 py-1 text-xs rounded-md bg-white dark:bg-slate-600 shadow-sm font-medium transition-all text-slate-800 dark:text-white';
+            const inactiveClass = 'px-3 py-1 text-xs rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300 transition-all';
+            
+            if (state.format === 'rich') {
+                els.fmtRich.className = activeClass;
+                els.fmtSlack.className = inactiveClass;
+                els.modalFmtRich.className = activeClass;
+                els.modalFmtSlack.className = inactiveClass;
+            } else {
+                els.fmtSlack.className = activeClass;
+                els.fmtRich.className = inactiveClass;
+                els.modalFmtSlack.className = activeClass;
+                els.modalFmtRich.className = inactiveClass;
+            }
+        }
+
+        // --- The "Smart" Feature: Import Yesterday ---
+        function importYesterday() {
+            const history = JSON.parse(localStorage.getItem('dailyScrumHistory') || '[]');
+            if (history.length > 0) {
+                const lastEntry = history[0];
+                if (lastEntry.today && lastEntry.today.trim()) {
+                    els.inputYesterday.value = lastEntry.today;
+                    updateStateFromDOM();
+                    renderPreview();
+                    showToast('✅ ' + t('importedFromLast'));
+                    return;
+                } else {
+                    showToast(t('importNoToday'), true);
+                    return;
+                }
+            }
+            showToast(t('importNoHistory'), true);
+        }
+
+        // --- Custom Tags Management ---
+        function loadCustomTags() {
+            const savedTags = localStorage.getItem('dailyScrumCustomTags');
+            if (savedTags) {
+                try {
+                    state.customTags = JSON.parse(savedTags);
+                } catch (e) {
+                    console.error('Erro ao carregar tags:', e);
+                    state.customTags = [...defaultTags];
+                }
+            } else {
+                state.customTags = [...defaultTags];
+            }
+        }
+        
+        function saveCustomTags() {
+            localStorage.setItem('dailyScrumCustomTags', JSON.stringify(state.customTags));
+            renderQuickTags();
+        }
+        
+        function renderQuickTags() {
+            const container = document.getElementById('quick-tags-container');
+            if (!container) return;
+            
+            if (state.customTags.length === 0) {
+                container.innerHTML = '<p class="text-sm text-slate-400">Nenhuma tag configurada. Clique em "Tags" para adicionar.</p>';
+                return;
+            }
+            
+            container.innerHTML = state.customTags.map((tag, index) => {
+                const colorClasses = getTagColorClasses(tag.color);
+                return `
+                    <button 
+                        onclick="insertTag('${tag.text.replace(/'/g, "\\'")}')" 
+                        class="text-xs ${colorClasses} px-3 py-1.5 rounded-lg hover:opacity-80 transition-all transform hover:scale-105 font-medium"
+                        title="Inserir: ${tag.text}"
+                    >
+                        ${tag.label}
+                    </button>
+                `;
+            }).join('');
+        }
+        
+        function getTagColorClasses(color) {
+            const colorMap = {
+                slate: 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200',
+                blue: 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300',
+                green: 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300',
+                yellow: 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300',
+                red: 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300',
+                purple: 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300'
+            };
+            return colorMap[color] || colorMap.slate;
+        }
+        
+        function insertTag(tagText) {
+            const activeEl = state.lastFocusedInput;
+            
+            if (activeEl && (activeEl.id === 'input-yesterday' || activeEl.id === 'input-today' || activeEl.id === 'input-blockers')) {
+                const start = activeEl.selectionStart;
+                const end = activeEl.selectionEnd;
+                const text = activeEl.value;
+                const before = text.substring(0, start);
+                const after = text.substring(end, text.length);
+                
+                const needsSpace = start > 0 && before[start - 1] !== '\n' && before[start - 1] !== ' ';
+                const insertion = (needsSpace ? ' ' : '') + tagText + ' ';
+                
+                activeEl.value = before + insertion + after;
+                activeEl.selectionStart = activeEl.selectionEnd = start + insertion.length;
+                activeEl.focus();
+                
+                updateStateFromDOM();
+                renderPreview();
+            } else {
+                showToast('💡 ' + t('tagsClickFieldFirst'), true);
+            }
+        }
+        
+        function toggleTagsConfig() {
+            const modal = document.getElementById('tags-modal');
+            const isHidden = modal.classList.contains('hidden');
+            
+            if (isHidden) {
+                modal.classList.remove('hidden');
+                renderTagsList();
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+        
+        function renderTagsList() {
+            const listEl = document.getElementById('tags-list');
+            
+            if (state.customTags.length === 0) {
+                listEl.innerHTML = `
+                    <div class="text-center py-12 text-slate-400">
+                        <i class="fas fa-tags text-5xl mb-4"></i>
+                        <p>${t('tagsEmpty')}</p>
+                        <p class="text-sm mt-2">${t('tagsEmptyHint')}</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            listEl.innerHTML = state.customTags.map((tag, index) => {
+                const colorClasses = getTagColorClasses(tag.color);
+                return `
+                    <div class="flex flex-col sm:flex-row items-center gap-3 p-3 bg-slate-50 dark:bg-slate-900/50 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-purple-300 dark:hover:border-purple-700 transition-colors">
+                        <div class="flex-shrink-0 hidden sm:block">
+                            <button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 cursor-move" title="Arrastar (em breve)">
+                                <i class="fas fa-grip-vertical"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="flex-grow grid grid-cols-1 sm:grid-cols-3 gap-3 items-center w-full">
+                            <div>
+                                <input 
+                                    type="text" 
+                                    value="${tag.text}" 
+                                    onchange="updateTag(${index}, 'text', this.value)"
+                                    class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded px-2 py-1 text-sm"
+                                    placeholder="[TAG]"
+                                    aria-label="Texto da tag"
+                                >
+                            </div>
+                            <div>
+                                <input 
+                                    type="text" 
+                                    value="${tag.label}" 
+                                    onchange="updateTag(${index}, 'label', this.value)"
+                                    class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded px-2 py-1 text-sm"
+                                    placeholder="Nome"
+                                    aria-label="Rótulo da tag"
+                                >
+                            </div>
+                            <div>
+                                <select 
+                                    onchange="updateTag(${index}, 'color', this.value)"
+                                    class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded px-2 py-1 text-sm"
+                                    aria-label="Cor da tag"
+                                >
+                                    <option value="slate" ${tag.color === 'slate' ? 'selected' : ''}>Cinza</option>
+                                    <option value="blue" ${tag.color === 'blue' ? 'selected' : ''}>Azul</option>
+                                    <option value="green" ${tag.color === 'green' ? 'selected' : ''}>Verde</option>
+                                    <option value="yellow" ${tag.color === 'yellow' ? 'selected' : ''}>Amarelo</option>
+                                    <option value="red" ${tag.color === 'red' ? 'selected' : ''}>Vermelho</option>
+                                    <option value="purple" ${tag.color === 'purple' ? 'selected' : ''}>Roxo</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between w-full sm:w-auto mt-2 sm:mt-0 gap-3">
+                            <div class="flex-shrink-0">
+                                <span class="${colorClasses} px-3 py-1 rounded text-xs font-medium">${tag.label}</span>
+                            </div>
+                            <div class="flex-shrink-0">
+                                <button 
+                                    onclick="deleteTag(${index})" 
+                                    class="text-red-400 hover:text-red-600 transition-colors p-2"
+                                    title="Deletar"
+                                >
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function addNewTag() {
+            const textInput = document.getElementById('new-tag-text');
+            const labelInput = document.getElementById('new-tag-label');
+            const colorSelect = document.getElementById('new-tag-color');
+            
+            const text = textInput.value.trim();
+            const label = labelInput.value.trim();
+            const color = colorSelect.value;
+            
+            if (!text || !label) {
+                showToast('❌ ' + t('tagsFillFields'), true);
+                return;
+            }
+            
+            state.customTags.push({ text, label, color });
+            saveCustomTags();
+            renderTagsList();
+            
+            textInput.value = '';
+            labelInput.value = '';
+            colorSelect.value = 'slate';
+            
+            showToast('✅ ' + t('tagsAdded'));
+        }
+        
+        function updateTag(index, field, value) {
+            if (state.customTags[index]) {
+                state.customTags[index][field] = value;
+                saveCustomTags();
+                renderTagsList();
+            }
+        }
+        
+        function deleteTag(index) {
+            if (confirm(t('tagsDeleteConfirm'))) {
+                state.customTags.splice(index, 1);
+                saveCustomTags();
+                renderTagsList();
+                showToast('🗑️ ' + t('tagsDeleted'));
+            }
+        }
+        
+        function resetTagsToDefault() {
+            if (confirm(t('tagsRestoreConfirm'))) {
+                state.customTags = [...defaultTags];
+                saveCustomTags();
+                renderTagsList();
+                showToast('⚙️ ' + t('tagsRestored'));
+            }
+        }
+
+        // --- Data Persistence ---
+        function saveToStorage() {
+            const data = {
+                yesterday: state.yesterday,
+                today: state.today,
+                blockers: state.blockers,
+                mood: state.mood
+            };
+            localStorage.setItem('dailyScrumDraft', JSON.stringify(data));
+        }
+
+        function loadFromStorage() {
+            const saved = localStorage.getItem('dailyScrumDraft');
+            if (saved) {
+                try {
+                    const data = JSON.parse(saved);
+                    state.yesterday = data.yesterday || '';
+                    state.today = data.today || '';
+                    state.blockers = data.blockers || '';
+                    state.mood = data.mood || '🚀';
+                    
+                    els.inputYesterday.value = state.yesterday;
+                    els.inputToday.value = state.today;
+                    els.inputBlockers.value = state.blockers;
+                    updateMoodButtons();
+                } catch (e) {
+                    console.error('Error loading from storage:', e);
+                }
+            }
+        }
+
+        function resetData() {
+            if (confirm(t('clearAllConfirm'))) {
+                state.yesterday = '';
+                state.today = '';
+                state.blockers = '';
+                state.mood = '🚀';
+                
+                els.inputYesterday.value = '';
+                els.inputToday.value = '';
+                els.inputBlockers.value = '';
+                
+                localStorage.removeItem('dailyScrumDraft');
+                updateMoodButtons();
+                renderPreview();
+                showToast('🗑️ ' + t('dataCleared'));
+            }
+        }
+
+        // --- History Management ---
+        function saveDaily() {
+            updateStateFromDOM();
+            
+            if (!state.yesterday.trim() && !state.today.trim()) {
+                showToast('❌ ' + t('dailySaveError'), true);
+                return;
+            }
+            
+
+            saveSound.currentTime = 0;
+            saveSound.play().catch(error => console.log("Erro ao tocar som: ", error));
+
+            const history = JSON.parse(localStorage.getItem('dailyScrumHistory') || '[]');
+            
+            const entry = {
+                date: new Date().toISOString(),
+                yesterday: state.yesterday,
+                today: state.today,
+                blockers: state.blockers,
+                mood: state.mood,
+                preview: state.plainTextPreview
+            };
+            
+            history.unshift(entry);
+            
+            if (history.length > 30) {
+                history.pop();
+            }
+            
+            localStorage.setItem('dailyScrumHistory', JSON.stringify(history));
+            showToast('✅ ' + t('dailySaved'));
+        }
+
+        function toggleHistory() {
+            const modal = document.getElementById('history-modal');
+            const isHidden = modal.classList.contains('hidden');
+            
+            if (isHidden) {
+                modal.classList.remove('hidden');
+                renderHistoryList();
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
+        function renderHistoryList() {
+            const listEl = document.getElementById('history-list');
+            const history = JSON.parse(localStorage.getItem('dailyScrumHistory') || '[]');
+            
+            if (history.length === 0) {
+                listEl.innerHTML = `
+                    <div class="text-center py-12 text-slate-400">
+                        <i class="fas fa-history text-5xl mb-4"></i>
+                        <p>${t('historyEmpty')}</p>
+                        <p class="text-sm mt-2">${t('historyEmptyHint')}</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            listEl.innerHTML = history.map((entry, index) => {
+                const date = new Date(entry.date);
+                const dateStr = date.toLocaleDateString(t('dateFormat'), { 
+                    weekday: 'short', 
+                    day: '2-digit', 
+                    month: 'short',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                const previewSnippet = entry.preview 
+                    ? entry.preview.substring(0, 100).replace(/\n/g, ' ') + '...'
+                    : 'No preview';
+                
+                return `
+                    <div class="p-4 bg-slate-50 dark:bg-slate-900/50 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-brand-500 dark:hover:border-brand-500 cursor-pointer transition-colors group" onclick="loadDailyFromHistory(${index})">
+                        <div class="flex justify-between items-start mb-2">
+                            <div class="flex items-center gap-2">
+                                <span class="text-2xl">${entry.mood || '🚀'}</span>
+                                <span class="font-medium text-slate-700 dark:text-slate-200">${dateStr}</span>
+                            </div>
+                            <button onclick="event.stopPropagation(); deleteDailyFromHistory(${index})" class="text-slate-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity p-1">
+                                <i class="fas fa-trash text-sm"></i>
+                            </button>
+                        </div>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">${previewSnippet}</p>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function loadDailyFromHistory(index) {
+            const history = JSON.parse(localStorage.getItem('dailyScrumHistory') || '[]');
+            const entry = history[index];
+            
+            if (entry) {
+                state.yesterday = entry.yesterday || '';
+                state.today = entry.today || '';
+                state.blockers = entry.blockers || '';
+                state.mood = entry.mood || '🚀';
+                
+                els.inputYesterday.value = state.yesterday;
+                els.inputToday.value = state.today;
+                els.inputBlockers.value = state.blockers;
+                
+                updateMoodButtons();
+                renderPreview();
+                toggleHistory();
+                showToast('📂 ' + t('historyLoaded'));
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+        
+        function deleteDailyFromHistory(index) {
+            if (confirm(t('deleteHistoryConfirm'))) {
+                let history = JSON.parse(localStorage.getItem('dailyScrumHistory') || '[]');
+                history.splice(index, 1);
+                localStorage.setItem('dailyScrumHistory', JSON.stringify(history));
+                renderHistoryList();
+                showToast('🗑️ ' + t('historyDeleted'));
+            }
+        }
+        
+        function clearHistory() {
+            if (confirm(t('clearHistoryConfirm'))) {
+                localStorage.removeItem('dailyScrumHistory');
+                renderHistoryList();
+                showToast('🗑️ ' + t('historyCleared'));
+            }
+        }
+
+        // --- Timer Logic ---
+        function formatTime(seconds) {
+            const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+            const s = (seconds % 60).toString().padStart(2, '0');
+            return `${m}:${s}`;
+        }
+
+        function toggleTimer() {
+            if (state.isRunning) {
+                clearInterval(state.timerInterval);
+                state.isRunning = false;
+                els.btnTimerToggle.innerHTML = `<i class="fas fa-play"></i> ${t('timerContinue')}`;
+            } else {
+                state.isRunning = true;
+                els.btnTimerToggle.innerHTML = `<i class="fas fa-pause"></i> ${t('timerPause')}`;
+                state.timerInterval = setInterval(() => {
+                    if (state.timerCurrent > 0) {
+                        state.timerCurrent--;
+                        updateTimerUI();
+                    } else {
+                        clearInterval(state.timerInterval);
+                        state.isRunning = false;
+                        els.btnTimerToggle.innerHTML = `<i class="fas fa-stop"></i> ${t('timerEnd')}`;
+                        els.timerDisplay.classList.add('text-red-300', 'pulse-ring');
+                        showToast('⏰ ' + t('timerFinished'), true);
+                    }
+                }, 1000);
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(state.timerInterval);
+            state.isRunning = false;
+            state.timerCurrent = state.timerInitial;
+            els.btnTimerToggle.innerHTML = `<i class="fas fa-play"></i> ${t('timerStart')}`;
+            els.timerDisplay.classList.remove('text-red-300', 'pulse-ring');
+            updateTimerUI();
+        }
+
+        function updateTimerUI() {
+            els.timerDisplay.textContent = formatTime(state.timerCurrent);
+            const percentage = (state.timerCurrent / state.timerInitial) * 100;
+            els.timerProgress.style.width = `${percentage}%`;
+            
+            if (percentage < 20) {
+                els.timerProgress.className = 'h-full bg-red-500 transition-all duration-1000';
+            } else if (percentage < 50) {
+                els.timerProgress.className = 'h-full bg-yellow-400 transition-all duration-1000';
+            } else {
+                els.timerProgress.className = 'h-full bg-green-400 transition-all duration-1000';
+            }
+        }
+
+        // --- Export/Import ---
+        function exportData() {
+            const data = {
+                draft: JSON.parse(localStorage.getItem('dailyScrumDraft') || '{}'),
+                history: JSON.parse(localStorage.getItem('dailyScrumHistory') || '[]'),
+                tags: JSON.parse(localStorage.getItem('dailyScrumCustomTags') || '[]'),
+                settings: JSON.parse(localStorage.getItem('dailyScrumSettings') || '{}'),
+                exportDate: new Date().toISOString()
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `daily-scrum-backup-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            showToast('✅ ' + t('dataExported'));
+        }
+        
+        function importData() {
+            document.getElementById('import-file-input').click();
+        }
+        
+        document.getElementById('import-file-input').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                try {
+                    const data = JSON.parse(event.target.result);
+                    
+                    if (data.draft) {
+                        localStorage.setItem('dailyScrumDraft', JSON.stringify(data.draft));
+                    }
+                    if (data.history) {
+                        localStorage.setItem('dailyScrumHistory', JSON.stringify(data.history));
+                    }
+                    if (data.tags) {
+                        localStorage.setItem('dailyScrumCustomTags', JSON.stringify(data.tags));
+                    }
+                    if (data.settings) {
+                        localStorage.setItem('dailyScrumSettings', JSON.stringify(data.settings));
+                    }
+                    
+                    // Reload everything
+                    loadSettings();
+                    loadCustomTags();
+                    loadFromStorage();
+                    renderPreview();
+                    renderQuickTags();
+                    
+                    showToast('✅ ' + t('dataImported'));
+                } catch (err) {
+                    console.error('Import error:', err);
+                    showToast('❌ ' + t('dataImportError'), true);
+                }
+            };
+            reader.readAsText(file);
+            
+            e.target.value = '';
+        });
+
+        // --- Utils ---
+        function copyToClipboard() {
+            const textToCopy = state.plainTextPreview;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showToast('✅ ' + t('copiedSuccess'));
+                
+                const btn = document.getElementById('btn-copy');
+                const originalHTML = btn.innerHTML;
+                const originalClasses = btn.className;
+                
+                btn.innerHTML = `<i class="fas fa-check"></i> ${t('copied')}`;
+                btn.className = 'flex-1 bg-green-600 text-white py-2.5 rounded-lg font-medium hover:opacity-90 transition shadow-lg flex justify-center items-center gap-2 group';
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                    btn.className = originalClasses;
+                }, 2000);
+            }).catch(err => {
+                showToast('❌ ' + t('copyError'), true);
+                console.error('Erro ao copiar:', err);
+            });
+        }
+
+        function shareAPI() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My Daily Scrum',
+                    text: state.plainTextPreview,
+                }).then(() => {
+                    showToast('✅ ' + t('sharedSuccess'));
+                }).catch(err => {
+                    if (err.name !== 'AbortError') {
+                        console.error('Erro ao compartilhar:', err);
+                    }
+                });
+            } else {
+                showToast(t('shareNotSupported'), true);
+            }
+        }
+
+        function showToast(msg, isError = false) {
+            const toast = document.getElementById('toast');
+            const msgEl = document.getElementById('toast-message');
+            msgEl.textContent = msg;
+            
+            const icon = toast.querySelector('i');
+            if (isError) {
+                icon.className = 'fas fa-exclamation-circle text-red-500 text-lg';
+            } else {
+                icon.className = 'fas fa-check-circle text-green-500 text-lg';
+            }
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.theme = 'dark';
+            } else {
+                localStorage.theme = 'light';
+            }
+            updateThemeIcons();
+        }
+
+        function updateThemeIcons() {
+            if (document.documentElement.classList.contains('dark')) {
+                els.themeIconMoon.classList.add('hidden');
+                els.themeIconSun.classList.remove('hidden');
+            } else {
+                els.themeIconMoon.classList.remove('hidden');
+                els.themeIconSun.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
